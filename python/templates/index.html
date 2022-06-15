@@ -1,0 +1,121 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-12">
+      <h1 class="text-light text-center">CONTACTS APP</h1>
+    </div>
+  </div>
+  <div class="row mt-5 align-items-center">
+    <div class="col-md-3 mb-5">
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+      {% with color="success" %}
+      {% if message == "Contact deleted successfully" %}
+      {% set color = "danger" %}
+      {% endif %}
+      
+      <div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endwith %} {% endfor %} {% endif %} {% endwith %}  
+        <form action="/add_contact" method="post" class="sticky-top">
+          <div class="card bg-transparent animate__animated animate__flipInY">
+            <div class="mb-3">
+              <label class="form-label text-light">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your name"
+                name="name"
+                maxlength="10"
+                id="focusedInput"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-light">Phone</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your phone"
+                name="phone"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-light">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your email"
+                name="email"
+              />
+            </div>
+            <button type="submit" class="btn btn-outline-primary text-light">
+              Submit
+            </button>
+          </div>
+        </form>
+    </div>
+    <div class="col-md-8 ms-md-5 mb-5">
+      <table class="table table-responsive table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+
+          <tr>
+            <th scope="row">{{contact.1}}</th>
+            <td>{{contact.2}}</td>
+            <td>{{contact.3}}</td>
+            <td>
+              <a
+                href="/get_contact/{{contact.0}}"
+                class="btn btn-outline-primary text-light"
+                >Edit</a
+              >
+              <a
+                href="/delete_contact/{{contact.0}}"
+                class="btn btn-outline-danger text-light ms-3"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+          <!-- <tr>
+                    <th scope="row">Alexander Martinezzz</th>
+                    <td>01234567</td>
+                    <td>alxandermartinez005@gmail.coma</td>
+                    <td>
+                        <a href="#" class="btn btn-outline-primary text-light">Edit</a>
+                        <a href="#" class="btn btn-outline-danger text-light ms-3">Delete</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Otto</th>
+                    <td>111111</td>
+                    <td>Otto@</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Larry</th>
+                    <td>2222222</td>
+                    <td>Larry@</td>
+                  </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

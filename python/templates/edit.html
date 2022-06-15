@@ -1,0 +1,53 @@
+{% extends "layout.html" %} {% block body %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="text-white">EDIT CONTACT</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="/update_contact/{{contact.0}}" method="post">
+                <div class="card bg-transparent animate__animated animate__flipInY">
+                    <div class="mb-3">
+                        <label class="form-label text-light">Name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            name="name"
+                            maxlength="10"
+                            id="focusedInput"
+                            value="{{contact.1}}"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light">Phone</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter your phone"
+                            name="phone"
+                            value="{{contact.2}}"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light">Email</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            name="email"
+                            value="{{contact.3}}"
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary text-light">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
